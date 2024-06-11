@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { formatPrice } from "../../utils/helpers";
 import { useDispatch, useSelector } from "react-redux";
@@ -72,8 +72,8 @@ const SearchResults = () => {
         </div>
         {isModalVisible && <SingleProduct />}
         {results.length > 0 ? (
-          results.map((product) => (
-            <div className="product-items grid">
+          <div className="product-items grid">
+            {results.map((product) => (
               <div
                 className="product-item bg-white"
                 key={product.id}
@@ -94,8 +94,8 @@ const SearchResults = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          ))
+            ))}
+          </div>
         ) : (
           <div className="section-title">
             <h3 className="text-uppercase fw-5 text-regal-blue ls-1">
