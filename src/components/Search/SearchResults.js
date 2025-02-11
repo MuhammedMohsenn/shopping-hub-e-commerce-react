@@ -20,7 +20,9 @@ const SearchResults = () => {
     const fetchAllProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch("https://dummyjson.com/products");
+        const response = await fetch(
+          `https://dummyjson.com/products/search?q=${query}`
+        );
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
