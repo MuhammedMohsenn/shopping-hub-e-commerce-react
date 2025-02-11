@@ -56,8 +56,8 @@ const CartPage = () => {
             <div className="cart-content grid">
               <div className="cart-left">
                 <div className="cart-items grid">
-                  {cartProducts.map((cartProduct) => (
-                    <div className="cart-item grid" key={cartProduct.id}>
+                  {cartProducts.map((cartProduct, index) => (
+                    <div className="cart-item grid" key={index}>
                       <div className="cart-item-img flex flex-column bg-white">
                         <img
                           src={cartProduct.images[0]}
@@ -120,7 +120,7 @@ const CartPage = () => {
                         </div>
                         <div className="flex flex-between">
                           <div className="text-pine-green fw-4 fs-15 price">
-                            Price : {formatPrice(cartProduct.price)}.00
+                            Price : {formatPrice(cartProduct.price)}
                           </div>
                           <div className="sub-total fw-6 fs-18 text-regal-blue">
                             <span>Sub Total: </span>
@@ -149,7 +149,7 @@ const CartPage = () => {
                   <ul className="cart-summary-info">
                     <li className="flex flex-between">
                       <span className="fw-4">
-                        Selected {totalItems} items(s) Price
+                        Selected {totalItems} item(s) Price
                       </span>
                       <span className="fw-7">{formatPrice(totalAmount)}</span>
                     </li>

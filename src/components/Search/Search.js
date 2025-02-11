@@ -13,7 +13,7 @@ const Search = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (query.trim()) {
-      navigate(`/search?query=${query}`);
+      navigate(`/search?q=${query}`);
     }
   };
 

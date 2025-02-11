@@ -21,35 +21,41 @@ const HomePage = () => {
   );
   const { catProductAll: productsByCategory, catProductAllStatus } =
     useSelector((state) => state.category);
+
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCategories());
-    dispatch(fetchProductsByCategory(1, "all"));
-    dispatch(fetchProductsByCategory(2, "all"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
+  useEffect(() => {
+    if (categories.length > 0) {
+      dispatch(fetchProductsByCategory(categories[0].slug, "all"));
+      dispatch(fetchProductsByCategory(categories[1].slug, "all"));
+    }
+  }, [categories, dispatch]);
+
+  // console.log("productsByCategory", productsByCategory);
   return (
     <div className="home-page">
       <Slider />
       <Category categories={categories} status={categoryStatus} />
       <ProductList products={products} status={productStatus} />
       <section>
-        {productsByCategory[0] && (
+        {productsByCategory.products && (
           <SingleCategory
-            products={productsByCategory[0]}
+            products={productsByCategory}
             status={catProductAllStatus}
           />
         )}
       </section>
-      <section>
-        {productsByCategory[1] && (
+      {/* <section>
+        {productsByCategory.products && (
           <SingleCategory
-            products={productsByCategory[1]}
+            products={productsByCategory.products[1]}
             status={catProductAllStatus}
           />
         )}
-      </section>
+      </section> */}
     </div>
   );
 };

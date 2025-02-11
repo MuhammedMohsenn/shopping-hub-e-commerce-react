@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { formatPrice } from "../../utils/helpers";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsModalVisible, setModalData } from "../../store/modalSlice";
 import "../ProductList/ProductList.scss";
@@ -12,7 +11,7 @@ const SearchResults = () => {
   const dispatch = useDispatch();
   const { isModalVisible } = useSelector((state) => state.modal);
   const location = useLocation();
-  const query = new URLSearchParams(location.search).get("query");
+  const query = new URLSearchParams(location.search).get("q");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,9 +20,7 @@ const SearchResults = () => {
     const fetchAllProducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch(
-          "https://api.escuelajs.co/api/v1/products"
-        );
+        const response = await fetch("https://dummyjson.com/products");
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -31,7 +28,7 @@ const SearchResults = () => {
 
         const data = await response.json();
 
-        const filteredResults = data.filter((product) =>
+        const filteredResults = data.products.filter((product) =>
           product.title.toLowerCase().includes(query.toLowerCase())
         );
 
@@ -73,16 +70,16 @@ const SearchResults = () => {
         {isModalVisible && <SingleProduct />}
         {results.length > 0 ? (
           <div className="product-items grid">
-            {results.map((product) => (
+            {results.map((product, index) => (
               <div
-                className="product-item bg-white"
-                key={product.id}
+                className="product-item"
+                key={index}
                 onClick={() => viewModalHandler(product)}
               >
-                <div className="product-item-img">
-                  <img src={product.images[0]} alt="" />
+                <div className="product-item-img bg-white">
+                  <img src={product.images[0]} alt={product.title} />
                   <div className="product-item-cat text-white fs-13 text-uppercase bg-gold fw-6">
-                    {product.category.name}
+                    {product.category}
                   </div>
                 </div>
                 <div className="product-item-body">
@@ -90,7 +87,7 @@ const SearchResults = () => {
                     {product.title}
                   </h6>
                   <div className="product-item-price text-regal-blue fw-7 fs-18">
-                    {formatPrice(product.price)}
+                    ${product.price}
                   </div>
                 </div>
               </div>

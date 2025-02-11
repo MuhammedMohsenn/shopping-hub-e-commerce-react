@@ -7,14 +7,18 @@ import "./CategoryPage.scss";
 
 const CategoryPage = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { slug } = useParams();
   const { catProductSingle: products, catProductSingleStatus: status } =
     useSelector((state) => state.category);
 
   useEffect(() => {
-    dispatch(fetchProductsByCategory(id, "single"));
+    dispatch(fetchProductsByCategory(slug, "single"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [slug]);
+
+  useEffect(() => {
+    dispatch(fetchProductsByCategory(slug, "single"));
+  }, [slug, dispatch]);
 
   return (
     <div className="category-page">
@@ -35,7 +39,7 @@ const CategoryPage = () => {
                 <i className="fas fa-chevron-right"></i>
               </span>
             </li>
-            <li>{products[0] && products[0].category.name}</li>
+            <li>{products.length > 0 ? slug : slug}</li>
           </ul>
         </div>
       </div>

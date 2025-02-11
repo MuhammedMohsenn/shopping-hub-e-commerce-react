@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCategories } from "../../store/categorySlice";
+import {
+  fetchCategories,
+  fetchProductsByCategory,
+} from "../../store/categorySlice";
 import { getCartTotal } from "../../store/cartSlice";
 import Search from "../Search/Search";
 
@@ -18,6 +21,10 @@ const Navbar = () => {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleCategoryClick = (category) => {
+    dispatch(fetchProductsByCategory(category));
+  };
 
   return (
     <nav className="navbar">
@@ -66,12 +73,12 @@ const Navbar = () => {
               >
                 <i className="fas fa-times"></i>
               </button>
-              {categories.map((category) => (
-                <li key={category.id}>
+              {categories.map((category, index) => (
+                <li key={index}>
                   <Link
-                    to={`/category/${category.id}`}
+                    to={`/category/${category.slug}`}
                     className="nav-link text-white"
-                    onClick={() => setIsSidebarOpen(false)}
+                    onClick={() => handleCategoryClick(category.slug)}
                   >
                     {category.name}
                   </Link>

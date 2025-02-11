@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 import "./Error.scss";
-import {error} from "../../utils/images";
+import { error } from "../../utils/images";
 
 const Error = () => {
   return (
-    <div className='container'>
-        <div class = "flex flex-center error">
-            <img src = {error} alt = "error" />
-        </div>
+    <div className="container">
+      <div className="flex flex-center error">
+        <img src={error} alt="error" />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Error
+export default Error;

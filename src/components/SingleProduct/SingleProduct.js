@@ -3,7 +3,6 @@ import "./SingleProduct.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { setIsModalVisible } from "../../store/modalSlice";
 import { addToCart, getCartTotal } from "../../store/cartSlice";
-import { formatPrice } from "../../utils/helpers";
 // import { useNavigate } from "react-router-dom";
 
 const SingleProduct = () => {
@@ -80,9 +79,7 @@ const SingleProduct = () => {
               <p className="description text-pine-green">
                 {product.description}
               </p>
-              <div className="price fw-7 fs-24">
-                Price: {formatPrice(product.price)}
-              </div>
+              <div className="price fw-7 fs-24">Price: {product.price}</div>
               <div className="qty flex">
                 <span className="text-light-blue qty-text">Qty: </span>
                 <div className="qty-change flex">

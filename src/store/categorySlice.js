@@ -21,7 +21,7 @@ const categorySlice = createSlice({
       state.status = action.payload;
     },
     setCategoriesProductAll(state, action) {
-      state.catProductAll.push(action.payload);
+      state.catProductAll = action.payload;
     },
     setCategoriesStatusAll(state, action) {
       state.catProductAllStatus = action.payload;
@@ -43,43 +43,90 @@ export const {
   setCategoriesProductSingle,
   setCategoriesStatusSingle,
 } = categorySlice.actions;
+
 export default categorySlice.reducer;
 
+// Fetch categories list
 export const fetchCategories = () => {
   return async function fetchCategoryThunk(dispatch) {
     dispatch(setStatus(STATUS.LOADING));
     try {
-      const response = await fetch(`${BASE_URL}categories`);
+      const response = await fetch(`${BASE_URL}products/categories`);
       const data = await response.json();
       dispatch(setCategories(data.slice(0, 5)));
       dispatch(setStatus(STATUS.IDLE));
     } catch (error) {
+      console.error("Error fetching categories:", error);
       dispatch(setStatus(STATUS.ERROR));
     }
   };
 };
 
-export const fetchProductsByCategory = (categoryID, dataType) => {
+// Fetch products by category (single or all)
+// export const fetchProductsByCategory = (categoryName, dataType) => {
+//   return async function fetchCategoryProductThunk(dispatch) {
+//     if (dataType === "all") dispatch(setCategoriesStatusAll(STATUS.LOADING));
+//     if (dataType === "single")
+//       dispatch(setCategoriesStatusSingle(STATUS.LOADING));
+
+//     try {
+//       const response = await fetch(
+//         `${BASE_URL}products/category/${categoryName}`
+//       );
+//       const data = await response.json();
+//       console.log("API response:", data);
+
+//       if (dataType === "all") {
+//         dispatch(setCategoriesProductAll(data.products.slice(0, 10))); // Fix: `data.products`
+//         dispatch(setCategoriesStatusAll(STATUS.IDLE));
+//       }
+
+//       if (dataType === "single") {
+//         dispatch(setCategoriesProductSingle(data.products.slice(0, 20))); // Fix: `data.products`
+//         dispatch(setCategoriesStatusSingle(STATUS.IDLE));
+//       }
+//     } catch (error) {
+//       console.error(
+//         `Error fetching products for category: ${categoryName}`,
+//         error
+//       );
+
+//       if (dataType === "all") dispatch(setCategoriesStatusAll(STATUS.ERROR));
+//       if (dataType === "single")
+//         dispatch(setCategoriesStatusSingle(STATUS.ERROR));
+//     }
+//   };
+// };
+
+export const fetchProductsByCategory = (categoryName, dataType) => {
   return async function fetchCategoryProductThunk(dispatch) {
-    if (dataType === "all") dispatch(setCategoriesStatusAll(STATUS.LOADING));
-    if (dataType === "single")
+    if (dataType === "single") {
       dispatch(setCategoriesStatusSingle(STATUS.LOADING));
+    } else if (dataType === "all") {
+      dispatch(setCategoriesStatusAll(STATUS.LOADING));
+    }
 
     try {
       const response = await fetch(
-        `${BASE_URL}categories/${categoryID}/products`
+        `${BASE_URL}products/category/${categoryName}`
       );
       const data = await response.json();
-      if (dataType === "all") {
-        dispatch(setCategoriesProductAll(data.slice(0, 10)));
+
+      if (dataType === "single") {
+        dispatch(setCategoriesProductSingle(data));
+        dispatch(setCategoriesStatusSingle(STATUS.IDLE));
+      } else if (dataType === "all") {
+        dispatch(setCategoriesProductAll(data)); // Store only `data.products`
         dispatch(setCategoriesStatusAll(STATUS.IDLE));
       }
-      if (dataType === "single") {
-        dispatch(setCategoriesProductSingle(data.slice(0, 20)));
-        dispatch(setCategoriesStatusSingle(STATUS.IDLE));
-      }
     } catch (error) {
-      dispatch(setCategoriesStatusAll(STATUS.ERROR));
+      console.error("Error fetching category products:", error);
+
+      if (dataType === "single") {
+        dispatch(setCategoriesStatusSingle(STATUS.ERROR));
+      } else if (dataType === "all") {
+        dispatch(setCategoriesStatusAll(STATUS.ERROR));
+      }
     }
   };
 };
