@@ -7,6 +7,14 @@ import Loader from "../Loader/Loader";
 import { useDispatch } from "react-redux";
 import { fetchProductsByCategory } from "../../store/categorySlice";
 
+const categoryImages = {
+  "kitchen-accessories": "categoriesImgs/blender.png",
+  "laptops": "categoriesImgs/laptop.png",
+  "mens-shirts": "categoriesImgs/men.png",
+  "mens-shoes": "categoriesImgs/shoes.png",
+  "mens-watches": "categoriesImgs/watches.png",
+};
+
 const Category = ({ categories, status }) => {
   const dispatch = useDispatch();
   const handleCategoryClick = (category) => {
@@ -34,7 +42,10 @@ const Category = ({ categories, status }) => {
               >
                 <div className="category-item">
                   <div className="category-item-img">
-                    <img src={category.image} alt="" />
+                    <img
+                      src={categoryImages[category.slug]}
+                      alt={category.name}
+                    />
                   </div>
                   <div className="category-item-name text-center">
                     <h6 className="fs-20">{category.name}</h6>

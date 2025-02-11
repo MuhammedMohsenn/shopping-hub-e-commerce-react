@@ -53,7 +53,7 @@ export const fetchCategories = () => {
     try {
       const response = await fetch(`${BASE_URL}products/categories`);
       const data = await response.json();
-      dispatch(setCategories(data.slice(0, 5)));
+      dispatch(setCategories(data.slice(5, 10)));
       dispatch(setStatus(STATUS.IDLE));
     } catch (error) {
       console.error("Error fetching categories:", error);
