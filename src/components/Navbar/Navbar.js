@@ -22,8 +22,11 @@ const Navbar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const visibleCategories = categories.slice(0, 8);
+
   const handleCategoryClick = (category) => {
     dispatch(fetchProductsByCategory(category));
+    setIsSidebarOpen(false);
   };
 
   return (
@@ -73,7 +76,7 @@ const Navbar = () => {
               >
                 <i className="fas fa-times"></i>
               </button>
-              {categories.map((category, index) => (
+              {visibleCategories.map((category, index) => (
                 <li key={index}>
                   <Link
                     to={`/category/${category.slug}`}

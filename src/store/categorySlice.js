@@ -53,7 +53,7 @@ export const fetchCategories = () => {
     try {
       const response = await fetch(`${BASE_URL}products/categories`);
       const data = await response.json();
-      dispatch(setCategories(data.slice(5, 10)));
+      dispatch(setCategories(data));
       dispatch(setStatus(STATUS.IDLE));
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -116,7 +116,7 @@ export const fetchProductsByCategory = (categoryName, dataType) => {
         dispatch(setCategoriesProductSingle(data));
         dispatch(setCategoriesStatusSingle(STATUS.IDLE));
       } else if (dataType === "all") {
-        dispatch(setCategoriesProductAll(data)); // Store only `data.products`
+        dispatch(setCategoriesProductAll(data));
         dispatch(setCategoriesStatusAll(STATUS.IDLE));
       }
     } catch (error) {

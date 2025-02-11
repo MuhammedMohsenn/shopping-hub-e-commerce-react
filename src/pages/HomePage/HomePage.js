@@ -19,8 +19,11 @@ const HomePage = () => {
   const { data: products, status: productStatus } = useSelector(
     (state) => state.product
   );
-  const { catProductAll: productsByCategory, catProductAllStatus } =
-    useSelector((state) => state.category);
+  const {
+    catProductSingle: productsByCategory,
+    catProductAll: productsByCategoryAll,
+    catProductAllStatus,
+  } = useSelector((state) => state.category);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -29,12 +32,12 @@ const HomePage = () => {
 
   useEffect(() => {
     if (categories.length > 0) {
-      dispatch(fetchProductsByCategory(categories[0].slug, "all"));
-      dispatch(fetchProductsByCategory(categories[1].slug, "all"));
+      dispatch(fetchProductsByCategory(categories[5].slug, "single"));
+      dispatch(fetchProductsByCategory(categories[14].slug, "all"));
     }
   }, [categories, dispatch]);
 
-  // console.log("productsByCategory", productsByCategory);
+  console.log("productsByCategory", productsByCategory);
   return (
     <div className="home-page">
       <Slider />
@@ -48,14 +51,14 @@ const HomePage = () => {
           />
         )}
       </section>
-      {/* <section>
+      <section>
         {productsByCategory.products && (
           <SingleCategory
-            products={productsByCategory.products[1]}
+            products={productsByCategoryAll}
             status={catProductAllStatus}
           />
         )}
-      </section> */}
+      </section>
     </div>
   );
 };

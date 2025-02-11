@@ -9,7 +9,7 @@ import { fetchProductsByCategory } from "../../store/categorySlice";
 
 const categoryImages = {
   "kitchen-accessories": "categoriesImgs/blender.png",
-  "laptops": "categoriesImgs/laptop.png",
+  laptops: "categoriesImgs/laptop.png",
   "mens-shirts": "categoriesImgs/men.png",
   "mens-shoes": "categoriesImgs/shoes.png",
   "mens-watches": "categoriesImgs/watches.png",
@@ -34,7 +34,7 @@ const Category = ({ categories, status }) => {
             </h3>
           </div>
           <div className="category-items grid">
-            {categories.slice(0, 5).map((category, index) => (
+            {categories.slice(5, 10).map((category, index) => (
               <Link
                 to={`/category/${category.slug}`}
                 key={index}
