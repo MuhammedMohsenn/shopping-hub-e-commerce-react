@@ -37,7 +37,6 @@ const HomePage = () => {
     }
   }, [categories, dispatch]);
 
-  console.log("productsByCategory", productsByCategory);
   return (
     <div className="home-page">
       <Slider />

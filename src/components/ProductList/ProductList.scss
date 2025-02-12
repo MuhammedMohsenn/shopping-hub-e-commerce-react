@@ -57,3 +57,26 @@
     column-gap: 20px;
   }
 }
+
+.star-rating {
+  display: flex;
+  align-items: center;
+}
+
+.star {
+  font-size: 16px;
+  margin-right: 2px;
+}
+
+.star.filled {
+  color: gold;
+}
+
+.star.half {
+  color: gold;
+  position: relative;
+}
+
+.star.empty {
+  color: lightgray;
+}

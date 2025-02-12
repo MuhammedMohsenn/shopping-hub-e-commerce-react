@@ -6,6 +6,7 @@ import SingleProduct from "../SingleProduct/SingleProduct";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
+import { StarRating } from "../StarsRating/StarRating";
 
 const ProductList = ({ products, status }) => {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const ProductList = ({ products, status }) => {
                   onClick={() => viewModalHandler(product)}
                 >
                   <div className="product-item-img bg-white">
-                    <img src={product.images[0]} alt="" />
+                    <img src={product.images[0]} alt={product.name} />
                     <div className="product-item-cat text-white fs-13 text-uppercase bg-gold fw-6">
                       {product.category}
                     </div>
@@ -49,8 +50,10 @@ const ProductList = ({ products, status }) => {
                       {product.title}
                     </h6>
                     <div className="product-item-price text-regal-blue fw-7 fs-18">
-                      {product.price}
+                      $ {product.price}
                     </div>
+
+                    <StarRating rating={product.rating} />
                   </div>
                 </div>
               ))}
