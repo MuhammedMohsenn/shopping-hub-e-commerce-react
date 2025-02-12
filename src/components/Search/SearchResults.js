@@ -6,6 +6,7 @@ import "../ProductList/ProductList.scss";
 import SingleProduct from "../SingleProduct/SingleProduct";
 import Error from "../Error/Error";
 import Loader from "../Loader/Loader";
+import { StarRating } from "../StarsRating/StarRating";
 
 const SearchResults = () => {
   const dispatch = useDispatch();
@@ -91,6 +92,8 @@ const SearchResults = () => {
                   <div className="product-item-price text-regal-blue fw-7 fs-18">
                     ${product.price}
                   </div>
+
+                  <StarRating rating={product.rating} />
                 </div>
               </div>
             ))}
