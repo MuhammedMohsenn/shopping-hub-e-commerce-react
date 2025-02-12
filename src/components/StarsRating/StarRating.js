@@ -10,19 +10,19 @@ export const StarRating = ({ rating }) => {
     <div className="star-rating">
       {[...Array(filledStars)].map((_, index) => (
         <span key={`filled-${index}`} className="star filled">
-          <i class="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
         </span>
       ))}
 
       {halfStar && (
         <span className="star half">
-          <i class="fa-regular fa-star-half-stroke"></i>
+          <i className="fa-regular fa-star-half-stroke"></i>
         </span>
       )}
 
       {[...Array(emptyStars)].map((_, index) => (
         <span key={`empty-${index}`} className="star empty">
-          <i class="fa-regular fa-star"></i>
+          <i className="fa-regular fa-star"></i>
         </span>
       ))}
     </div>

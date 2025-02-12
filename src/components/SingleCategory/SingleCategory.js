@@ -5,6 +5,7 @@ import SingleProduct from "../SingleProduct/SingleProduct";
 import Error from "../Error/Error";
 import Loader from "../Loader/Loader";
 import { STATUS } from "../../utils/status";
+import { StarRating } from "../StarsRating/StarRating";
 
 const SingleCategory = ({ products, status }) => {
   const dispatch = useDispatch();
@@ -51,6 +52,7 @@ const SingleCategory = ({ products, status }) => {
                       <div className="product-item-price text-regal-blue fw-7 fs-18">
                         {product.price}
                       </div>
+                      <StarRating rating={product.rating} />
                     </div>
                   </div>
                 ))}

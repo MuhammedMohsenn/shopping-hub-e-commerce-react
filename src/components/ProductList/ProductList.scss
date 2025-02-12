@@ -9,6 +9,7 @@
     border-radius: 4px;
     transition: $transition;
     background-color: #e0dede9e;
+
     &-body {
       padding: 12px 0;
     }
@@ -28,7 +29,7 @@
     }
 
     &-title {
-      padding: 8px 0;
+      // padding: 8px 0;
       opacity: 0.8;
       display: block;
     }
