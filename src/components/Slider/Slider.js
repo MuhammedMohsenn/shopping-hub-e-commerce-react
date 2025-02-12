@@ -1,17 +1,33 @@
-import React from 'react';
+import React from "react";
+import Slider from "react-slick";
 import "./Slider.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {sliderImages} from '../../utils/images';
+import { sliderImages } from "../../utils/images";
 
-const Slider = () => {
+const SliderComponent = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 700,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2500,
+    arrows: false,
+  };
+
   return (
-    <div className = "hero-slider">
-      <div className='hero-slider-item'>
-        <img src = {sliderImages[1]} alt = "" />
-      </div>
+    <div className="hero-slider">
+      <Slider {...settings}>
+        {sliderImages.map((image, index) => (
+          <div className="hero-slider-item" key={index}>
+            <img src={image} alt={`Slide ${index + 1}`} />
+          </div>
+        ))}
+      </Slider>
     </div>
-  )
-}
+  );
+};
 
-export default Slider
+export default SliderComponent;
