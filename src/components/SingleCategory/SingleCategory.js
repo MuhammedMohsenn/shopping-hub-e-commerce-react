@@ -45,8 +45,8 @@ const SingleCategory = ({ products, status }) => {
                         {product.category}
                       </div>
                     </div>
-                    <div className="product-item-body">
-                      <h6 className="product-item-title text-pine-green fw-4 fs-15">
+                    <div className="product-item-body space-y-2">
+                      <h6 className="product-item-title text-pine-green fw-4 fs-15 w-[175px] truncate">
                         {product.title}
                       </h6>
                       <div className="product-item-price text-regal-blue fw-7 fs-18">
