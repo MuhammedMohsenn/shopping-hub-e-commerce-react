@@ -65,14 +65,19 @@ const SingleProduct = () => {
         </button>
         <div className="details-content grid">
           {/* details left */}
-          <div className="details-right">
-            <div className="details-img">
-              <img src={product.images[0]} alt={product.title} />
+          <div className="details-left h-[400px] ">
+            <div className="details-img h-full overflow-y-auto flex justify-center">
+              <img
+                src={product.images[0]}
+                alt={product.title}
+                className="max-w-full h-auto object-cover"
+              />
             </div>
           </div>
+
           {/* detials right */}
-          <div className="details-left">
-            <div className="details-info">
+          <div className="details-right">
+            <div className="details-info h-full space-y-10">
               <h3 className="title text-regal-blue fs-22 fw-5">
                 {product.title}
               </h3>
