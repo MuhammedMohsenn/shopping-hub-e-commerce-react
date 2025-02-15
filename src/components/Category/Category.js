@@ -44,7 +44,7 @@ const Category = ({ categories, status }) => {
                   <div className="category-item-img">
                     <img
                       src={categoryImages[category.slug]}
-                      alt={category.name}
+                      alt={category.slug}
                     />
                   </div>
                   <div className="category-item-name text-center">

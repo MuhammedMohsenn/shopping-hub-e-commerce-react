@@ -40,7 +40,7 @@ const ProductList = ({ products, status }) => {
                   onClick={() => viewModalHandler(product)}
                 >
                   <div className="product-item-img bg-white">
-                    <img src={product.images[0]} alt={product.name} />
+                    <img src={product.images[0]} alt={product.title} />
                     <div className="product-item-cat text-white fs-13 text-uppercase bg-gold fw-6">
                       {product.category}
                     </div>
